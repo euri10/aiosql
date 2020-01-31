@@ -45,7 +45,9 @@ def test_parameterized_query(pg_conn, psycopg2_queries):
 def test_parameterized_record_query(pg_conn, psycopg2_queries):
     dsn = pg_conn.get_dsn_parameters()
     with psycopg2.connect(**dsn, cursor_factory=psycopg2.extras.RealDictCursor) as conn:
-        actual = psycopg2_queries.blogs.pg_get_blogs_published_after(conn, published=date(2018, 1, 1))
+        actual = psycopg2_queries.blogs.pg_get_blogs_published_after(
+            conn, published=date(2018, 1, 1)
+        )
 
     expected = [
         {"title": "How to make a pie.", "username": "bobsmith", "published": "2018-11-23 00:00"},

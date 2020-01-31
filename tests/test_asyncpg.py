@@ -50,7 +50,9 @@ async def test_parameterized_query(pg_dsn, asyncpg_queries):
 @pytest.mark.asyncio
 async def test_parameterized_record_query(pg_dsn, asyncpg_queries):
     conn = await asyncpg.connect(pg_dsn)
-    records = await asyncpg_queries.blogs.pg_get_blogs_published_after(conn, published=date(2018, 1, 1))
+    records = await asyncpg_queries.blogs.pg_get_blogs_published_after(
+        conn, published=date(2018, 1, 1)
+    )
     actual = [dict(rec) for rec in records]
     await conn.close()
 

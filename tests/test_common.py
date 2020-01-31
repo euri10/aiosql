@@ -17,9 +17,7 @@ blogs_files_fn = [
     ("users", "users.sql", ["get_all", "get_by_username", "get_by_lastname", "get_all_sorted"]),
 ]
 
-drivers = [
-(aiosqlite_queries()), (asyncpg_queries()), (psycopg2_queries()),(sqlite3_queries())
-]
+drivers = [(aiosqlite_queries()), (asyncpg_queries()), (psycopg2_queries()), (sqlite3_queries())]
 
 
 @pytest.mark.parametrize("queries", drivers)

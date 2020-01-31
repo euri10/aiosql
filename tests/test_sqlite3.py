@@ -47,7 +47,9 @@ def test_parameterized_query(sqlite3_conn, sqlite3_queries):
 
 def test_parameterized_record_query(sqlite3_conn, sqlite3_queries):
     sqlite3_conn.row_factory = dict_factory
-    actual = sqlite3_queries.blogs.sqlite_get_blogs_published_after(sqlite3_conn, published="2018-01-01")
+    actual = sqlite3_queries.blogs.sqlite_get_blogs_published_after(
+        sqlite3_conn, published="2018-01-01"
+    )
 
     expected = [
         {"title": "How to make a pie.", "username": "bobsmith", "published": "2018-11-23 00:00"},

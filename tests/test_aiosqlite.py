@@ -55,7 +55,9 @@ async def test_parameterized_query(sqlite3_db_path, aiosqlite_queries):
 async def test_parameterized_record_query(sqlite3_db_path, aiosqlite_queries):
     async with aiosqlite.connect(sqlite3_db_path) as conn:
         conn.row_factory = dict_factory
-        actual = await aiosqlite_queries.blogs.sqlite_get_blogs_published_after(conn, published="2018-01-01")
+        actual = await aiosqlite_queries.blogs.sqlite_get_blogs_published_after(
+            conn, published="2018-01-01"
+        )
 
         expected = [
             {
