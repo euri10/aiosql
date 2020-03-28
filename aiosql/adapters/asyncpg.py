@@ -94,12 +94,15 @@ class AsyncPGAdapter:
             async with connection.transaction():
                 yield stmt.cursor(*parameters)
 
-    async def insert_returning(self, conn, query_name, sql, parameters):
+    async def insert_returning(self, conn, query_name, sql, parameters, record_class=None):
         parameters = self.maybe_order_params(query_name, parameters)
         async with MaybeAcquire(conn) as connection:
             res = await connection.fetchrow(sql, *parameters)
             if res:
-                return res[0] if len(res) == 1 else res
+                temp=res[0] if len(res) == 1 else res
+                if record_class is not None:
+                    temp = record_class(**dict(temp))
+                return temp
             else:
                 return None
 
