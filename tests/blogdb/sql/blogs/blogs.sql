@@ -10,7 +10,7 @@ values (
   :title,
   :content,
   :published
-)
+);
 
 -- name: remove-blog!
 -- Remove a blog from the database
