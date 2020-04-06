@@ -12,7 +12,7 @@ def _create_methods(query_datum: QueryDatum, is_aio=True) -> List[Tuple[str, Cal
         async def fn(self, conn, *args, **kwargs):
             parameters = kwargs if len(kwargs) > 0 else args
             if operation_type == SQLOperationType.INSERT_RETURNING:
-                return await self.driver_adapter.insert_returning(conn, query_name, sql, parameters)
+                return await self.driver_adapter.insert_returning(conn, query_name, sql, parameters, record_class)
             elif operation_type == SQLOperationType.INSERT_UPDATE_DELETE:
                 return await self.driver_adapter.insert_update_delete(
                     conn, query_name, sql, parameters

@@ -123,6 +123,24 @@ async def test_insert_returning(pg_dsn, queries):
     assert (blogid, title) == expected
 
 
+
+@pytest.mark.asyncio
+async def test_insert_returning2(pg_dsn, queries):
+    async with asyncpg.create_pool(pg_dsn) as pool:
+        title = "My first blog"
+        published = date(2018, 12, 4)
+        userblogsummary = await queries.blogs.pg_publish_blog2(
+            pool,
+            userid=2,
+            title=title,
+            content="Hello, World!",
+            published=published,
+        )
+    expected = UserBlogSummary(title,published)
+    assert isinstance(userblogsummary, UserBlogSummary)
+    assert userblogsummary == expected
+
+
 @pytest.mark.asyncio
 async def test_delete(pg_dsn, queries):
     # Removing the "janedoe" blog titled "Testing"

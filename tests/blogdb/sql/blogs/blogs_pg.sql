@@ -25,6 +25,21 @@ values (
 returning blogid, title;
 
 
+-- name: pg-publish-blog2<!
+-- record_class: UserBlogSummary
+insert into blogs (
+    userid,
+    title,
+    content,
+    published
+)
+values (
+           :userid,
+           :title,
+           :content,
+           :published
+       ) returning title, published;
+
 -- name: pg-bulk-publish*!
 -- Insert many blogs at once
 insert into blogs (
